@@ -9,20 +9,17 @@ This is a RESTful API for a Task Management Application built using Node.js, Exp
 - Pagination support
 - Soft delete implementation
 - Error handling middleware
-- API logging using Morgan
 
 ## Tech Stack
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB with Mongoose
 - **Validation**: express-validator
-- **Logging**: Morgan
 - **Environment Configuration**: dotenv
 
 ## Installation and Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/task-management-api.git
-   cd task-management-api
+   git clone https://github.com/silvi-Maheshwari/web-spiders.git
    ```
 2. Install dependencies:
    ```bash
@@ -30,8 +27,8 @@ This is a RESTful API for a Task Management Application built using Node.js, Exp
    ```
 3. Create a `.env` file in the root directory and set up your environment variables:
    ```env
-   PORT=5000
-   MONGO_URI=your_mongodb_connection_string
+   PORT=3000
+   MONGO_URI=mongodb+srv://maheshwarisilvi98:silvi123@cluster0.jftpm.mongodb.net/books?retryWrites=true&w=majority
    ```
 4. Start the server:
    ```bash
@@ -41,21 +38,18 @@ This is a RESTful API for a Task Management Application built using Node.js, Exp
 ## Database Schema and Sample Data
 ### Schema (`models/Task.js`)
 ```javascript
-const mongoose = require("mongoose");
-
-const TaskSchema = new mongoose.Schema(
-  {
-    title: { type: String, required: true, maxlength: 100 },
+const mongoose=require('mongoose')
+const TaskSchema=new mongoose.Schema({
+    title:{type:String,required:true,maxlength: 100 },
     description: { type: String },
-    status: { type: String, enum: ["TODO", "IN_PROGRESS", "COMPLETED"], default: "TODO" },
-    priority: { type: String, enum: ["LOW", "MEDIUM", "HIGH"], required: true },
-    dueDate: { type: Date },
-    deletedAt: { type: Date, default: null },
-  },
-  { timestamps: true }
-);
-
-module.exports = mongoose.model("Task", TaskSchema);
+    status:{ type: String, enum: ["TODO", "IN_PROGRESS", "COMPLETED"], default: "TODO"},
+    priority:{ type: String, enum: ["LOW", "MEDIUM", "HIGH"], required: true },
+    dueDate:{ type: Date },
+},
+{ timestamps: true }
+)
+const taskmodel=mongoose.model("Task1", TaskSchema)
+module.exports=taskmodel
 ```
 
 ### Sample Data (`db/sampleData.js`)
@@ -111,7 +105,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 - Use Postman or cURL to test API endpoints.
 - Sample cURL request to create a task:
   ```bash
-  curl -X POST http://localhost:5000/tasks \
+  curl -X POST http://localhost:3000/tasks \
     -H "Content-Type: application/json" \
     -d '{"title": "New Task", "priority": "HIGH"}'
   ```
